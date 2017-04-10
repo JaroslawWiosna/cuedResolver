@@ -5,15 +5,21 @@ int main()
 
 	std::cout << __cplusplus << "\n";
 
-	Grid grid(5);
+	Grid grid(9);
 	
+	grid.setCue(2,3);
 	grid.setCue(3,1);
-	grid.setCue(4,5);
-	grid.setCue(5,5);
-	grid.setCue(1,1);
+	grid.setCue(5,9);
+	grid.setCue(6,6);
+	grid.setCue(9,3);
 	
-	grid.setBall(3,3);
-	grid.setPocket(2,5);
+	grid.setBoost(1,3,2,0);
+	grid.setBoost(3,5,0,3);
+	grid.setBoost(7,4,-3,0);
+	grid.setBoost(7,5,0,-1);
+
+	grid.setBall(5,6);
+	grid.setPocket(8,7);
 
 	grid.solve();
 	grid.printSolution();
