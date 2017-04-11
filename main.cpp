@@ -7,19 +7,20 @@ int main()
 
 	Grid grid(9);
 	
-	grid.setCue(2,3);
-	grid.setCue(3,1);
-	grid.setCue(5,9);
-	grid.setCue(6,6);
-	grid.setCue(9,3);
+	grid.setCue(1,1);
+	grid.setCue(1,4);
+	grid.setCue(1,6);
+	grid.setCue(1,8);
+	grid.setCue(6,7);
+	grid.setCue(9,7);
 	
-	grid.setBoost(1,3,2,0);
-	grid.setBoost(3,5,0,3);
-	grid.setBoost(7,4,-3,0);
-	grid.setBoost(7,5,0,-1);
+	grid.setBoost(5,2,0,1);
+	grid.setBoost(5,3,-2,2);
+	grid.setBoost(5,6,-3,0);
+	grid.setBoost(5,8,2,-2);
 
-	grid.setBall(5,6);
-	grid.setPocket(8,7);
+	grid.setBall(2,3);
+	grid.setPocket(8,3);
 
 	grid.solve();
 	grid.printSolution();

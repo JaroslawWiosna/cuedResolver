@@ -3,7 +3,10 @@
 
 #include<iostream>
 #include<utility> // pair
+#include<list> 
 #include<vector> 
+#include<string> 
+#include<sstream> 
 
 using Cell = std::pair<int, int>;
 using PairCell = std::pair<Cell, Cell>;
@@ -11,7 +14,7 @@ using PairCell = std::pair<Cell, Cell>;
 struct step {
 	unsigned int nr;
 	Cell ball;
-	std::vector<Cell> path;
+	std::string path;
 }; 
 
 class Grid{
@@ -60,22 +63,28 @@ class Grid{
 	}
 
 	void detectBoostCells() {
-		auto it = combinations.begin();
-		for( ; it != combinations.end() ; ) {
-			auto boost = boostVector.begin();
-			for( ; boost != boostVector.end() ; ) {
-				if (it->ball.first == boost->first.first
-					&& it->ball.second == boost->first.second) {
-					std::cout << it->ball.first 
-						<< "-" << it->ball.second << "\n" ;
-					//it->ball = boost->second;
-					it->ball.first = boost->second.first;
-					it->ball.second = boost->second.second;
+		bool willContinue{false};
+		do {
+			willContinue = false;
+			auto it = combinations.begin();
+			for( ; it != combinations.end() ; ) {
+				auto boost = boostVector.begin();
+				for( ; boost != boostVector.end() ; ) {
+					if (it->ball.first == boost->first.first
+						&& it->ball.second == boost->first.second) {
+						std::cout << it->ball.first 
+							<< "-" << it->ball.second << "\n" ;
+						//it->ball = boost->second;
+						it->ball.first = boost->second.first;
+						it->ball.second = boost->second.second;
+
+						willContinue = true;
+					}
+					++boost;
 				}
-				++boost;
+				++it;
 			}
-			++it;
-		}
+		} while(willContinue);
 /*
 		for (step s : combinations) {
 			for (PairCell p : boostVector) {
@@ -103,19 +112,26 @@ class Grid{
 */
 		// set init position
 		//combinations.push_back({0, ballStartPosition, std::vector<Cell>{}});
-		combinations.push_back({0, ballStartPosition, {}});
+		combinations.push_back({0, ballStartPosition, "st "});
 
 		for (unsigned int depth=1 ; depth <= maxDepth ; ++depth) {
 			for(step s : combinations) {
-				if (s.nr != depth-1) continue;
+			if (s.nr == depth-1) {
 				for(Cell n : cuesVector) {
-					std::vector<Cell> newPath = s.path;
-					newPath.push_back(n);
+					std::string newPath{s.path};
+					//newPath += std::to_string(n.first);
+					//newPath += "-";
+					//newPath += std::to_string(n.second);
+					//newPath += " ";
+					std::stringstream ss;
+					ss << s.path;
+					ss << n.first << "-" << n.second << " ";
 					combinations.push_back(
 						{depth, 
 						computeMovement(n, s.ball), 
-						newPath});
+						ss.str()});
 				}
+			}
 			}
 			this->detectOutOfGrid();
 			this->detectBoostCells();	
@@ -127,25 +143,22 @@ class Grid{
 		for(step n : combinations) {
 			std::cout << n.nr << " " 
 				<< n.ball.first << "-" << n.ball.second << "\n";
-			for(Cell c : n.path) {
-				std::cout << c.first << "-" << c.second <<", ";
-			}
-
-
+				std::cout << "<" << n.path;
+			
 			std::cout << "\n\n";
 		}	
 	}	
 
 	private:
 	unsigned int size;
-	std::vector<Cell> cuesVector;
-	std::vector<PairCell> boostVector;
+	std::list<Cell> cuesVector;
+	std::list<PairCell> boostVector;
 	Cell ballStartPosition;
 	Cell pocketPosition;
 
-	const unsigned int maxDepth = 7;
+	const unsigned int maxDepth = 11;
 
-	std::vector<step> combinations;
+	std::list<step> combinations;
 	
 };
 
