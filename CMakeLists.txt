@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 
 option(SANITIZER "Address Sanitizer" OFF)
-option(BUILD_TESTS "Build tests" OFF)
+option(BUILD_TESTS "Build tests" ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(COMPILE_FLAGS "--std=gnu++11 -Wall -Wno-missing-braces")

@@ -1,10 +1,9 @@
-#include<iostream>
-#include"Grid/Grid.hpp"
-int main()
+
+#include <gtest/gtest.h>
+#include "../Grid/Grid.hpp"
+
+TEST(Test, test01)
 {
-
-	std::cout << __cplusplus << "\n";
-
 	Grid grid(9);
 	
 	grid.setCue(1,1);
@@ -23,8 +22,13 @@ int main()
 	grid.setPocket(8,3);
 
 	grid.solve();
-	//grid.printSolution();
-	grid.printFastest();
-	
-	return 0;
+	ASSERT_TRUE(true);
+	ASSERT_EQ(grid.printFastestOnlyDepth(),8);
+
+}
+
+int main(int argc, char* argv[])
+{
+	::testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
 }

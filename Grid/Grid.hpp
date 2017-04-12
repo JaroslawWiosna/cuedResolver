@@ -149,6 +149,29 @@ class Grid{
 		}	
 	}	
 
+	void printFastest() {
+		for(step n : combinations) {
+			if(n.ball.first == pocketPosition.first &&
+			n.ball.second == pocketPosition.second) {
+				std::cout << n.nr << " " 
+					<< n.ball.first << "-" << n.ball.second << "\n";
+					std::cout << "<" << n.path;
+			
+				std::cout << "\n\n";
+				break;
+			}
+		}	
+	}	
+
+	int printFastestOnlyDepth() {
+		for(step n : combinations) {
+			if(n.ball.first == pocketPosition.first &&
+			n.ball.second == pocketPosition.second) {
+				return n.nr;
+			}
+		}	
+	}	
+
 	private:
 	unsigned int size;
 	std::list<Cell> cuesVector;
