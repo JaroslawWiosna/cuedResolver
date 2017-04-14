@@ -2,14 +2,13 @@
 #define GRID_HPP
 
 #include<iostream>
-#include<utility> // pair
+//#include<utility> // pair
 #include<list> 
 #include<vector> 
 #include<string> 
 #include<sstream> 
 
-using Cell = std::pair<int, int>;
-using PairCell = std::pair<Cell, Cell>;
+#include "../Cell/Cell.hpp"
 
 struct step {
 	unsigned int nr;
