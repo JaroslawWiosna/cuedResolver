@@ -21,12 +21,13 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINK_EXECUTABLE} ${LINK_FLAGS}" )
 
 project (cued)
 find_package(Gtest)
+include_directories( Grid )
+include_directories( Cell )
 add_executable(cued main.cpp Grid/Grid.cpp) 
-target_link_libraries(cued gtest pthread)
 include_directories(${GTEST_INCLUDE_DIRS})
+target_link_libraries(cued gtest pthread)
 
 enable_testing()
-find_package(Gtest)
 
 if(BUILD_TESTS)
   add_subdirectory(test)

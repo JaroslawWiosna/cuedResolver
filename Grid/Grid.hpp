@@ -8,7 +8,7 @@
 #include<string> 
 #include<sstream> 
 
-#include "../Cell/Cell.hpp"
+#include "Cell.hpp"
 
 struct step {
 	unsigned int nr;

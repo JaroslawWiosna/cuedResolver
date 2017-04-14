@@ -1,5 +1,5 @@
-#include<iostream>
-#include"Grid/Grid.hpp"
+#include <iostream>
+#include "Grid.hpp"
 int main()
 {
 

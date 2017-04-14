@@ -1,7 +1,6 @@
 
 #include <gtest/gtest.h>
-//#include "../../Grid/Grid.hpp"
-#include "../../Cell/Cell.hpp"
+#include "Cell.hpp"
 
 TEST(Test, CellTest)
 {
