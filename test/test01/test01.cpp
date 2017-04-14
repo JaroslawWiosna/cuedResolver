@@ -1,6 +1,6 @@
 
 #include <gtest/gtest.h>
-#include "../Grid/Grid.hpp"
+#include "../../Grid/Grid.hpp"
 
 TEST(Test, test01)
 {
