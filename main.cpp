@@ -27,4 +27,5 @@ int main()
 	grid.printFastest();
 	
 	return 0;
-}
+}	
+

@@ -21,7 +21,7 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINK_EXECUTABLE} ${LINK_FLAGS}" )
 
 project (cued)
 find_package(Gtest)
-add_executable(cued MACOSX_BUNDLE main.cpp) 
+add_executable(cued main.cpp Grid/Grid.cpp) 
 target_link_libraries(cued gtest pthread)
 include_directories(${GTEST_INCLUDE_DIRS})
 
