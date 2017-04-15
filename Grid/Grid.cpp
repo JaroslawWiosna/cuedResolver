@@ -67,7 +67,7 @@ void Grid::detectBoostCells() {
 }
 
 void Grid::solve() {
-	combinations.push_back({0, ballStartPosition, "st "});
+	combinations.push_back({0, ballStartPosition, ""});
 
 	for (unsigned int depth=1 ; depth <= maxDepth ; ++depth) {
 		for(step s : combinations) {
@@ -90,18 +90,24 @@ void Grid::solve() {
 		}
 		this->detectOutOfGrid();
 		this->detectBoostCells();	
-			
-	}	
+	}
+	// find the best solution
+	for(step n : combinations) {
+		if(n.ball.first == pocketPosition.first &&
+		n.ball.second == pocketPosition.second) {
+			solution.nr = n.nr;
+			solution.ball = std::make_pair(n.ball.first, n.ball.second);
+			solution.path = n.path;			
+			break;
+		}
+	}				
 }
 
 void Grid::printSolution() {
-	for(step n : combinations) {
-		std::cout << n.nr << " " 
-		<< n.ball.first << "-" << n.ball.second << "\n";
-		std::cout << "<" << n.path;
-			
-		std::cout << "\n\n";
-	}	
+	std::cout << solution.nr << " "
+	<< solution.ball.first << "-" << solution.ball.second << "\n";
+	std::cout << ":" << solution.path;
+	std::cout << "\n\n";
 }	
 
 void Grid::printFastest() {
@@ -126,3 +132,18 @@ int Grid::printFastestOnlyDepth() {
 		}
 	}	
 }	
+
+unsigned int Grid::getNrOfSolution() {
+	return solution.nr;
+}
+
+Cell Grid::getBallPositionOfSolution() {
+	return solution.ball;
+}
+
+std::string Grid::getPathOfSolution() {
+	// Removing trailing space char is necessary
+	// TODO: dirty solution... 
+	std::string res = solution.path;
+	return solution.path.substr(0, solution.path.size()-1); 
+}

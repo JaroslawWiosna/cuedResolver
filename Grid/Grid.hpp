@@ -30,6 +30,9 @@ class Grid{
 	void printSolution();
 	void printFastest();
 	int printFastestOnlyDepth();
+	unsigned int getNrOfSolution();
+	Cell getBallPositionOfSolution();
+	std::string getPathOfSolution();
 
 	private:
 	unsigned int size;
@@ -39,6 +42,7 @@ class Grid{
 	Cell pocketPosition;
 	const unsigned int maxDepth = 11;
 	std::list<step> combinations;
+	step solution;
 };
 #endif // GRID_HPP
 
