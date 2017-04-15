@@ -7,6 +7,7 @@
 #include<vector> 
 #include<string> 
 #include<sstream> 
+#include<chrono>
 
 #include "Cell.hpp"
 
@@ -33,6 +34,7 @@ class Grid{
 	unsigned int getNrOfSolution();
 	Cell getBallPositionOfSolution();
 	std::string getPathOfSolution();
+	unsigned int getStoperMilliSecond();
 
 	private:
 	unsigned int size;
@@ -43,6 +45,7 @@ class Grid{
 	const unsigned int maxDepth = 11;
 	std::list<step> combinations;
 	step solution;
+	std::chrono::duration<double, std::milli> stoperMilliSecond;
 };
 #endif // GRID_HPP
 

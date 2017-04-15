@@ -67,6 +67,7 @@ void Grid::detectBoostCells() {
 }
 
 void Grid::solve() {
+	auto begin = std::chrono::high_resolution_clock::now();
 	combinations.push_back({0, ballStartPosition, ""});
 
 	for (unsigned int depth=1 ; depth <= maxDepth ; ++depth) {
@@ -100,7 +101,9 @@ void Grid::solve() {
 			solution.path = n.path;			
 			break;
 		}
-	}				
+	}
+	auto end = std::chrono::high_resolution_clock::now();
+	stoperMilliSecond = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);		
 }
 
 void Grid::printSolution() {
@@ -146,4 +149,8 @@ std::string Grid::getPathOfSolution() {
 	// TODO: dirty solution... 
 	std::string res = solution.path;
 	return solution.path.substr(0, solution.path.size()-1); 
+}
+
+unsigned int Grid::getStoperMilliSecond() {
+	return stoperMilliSecond.count();
 }
