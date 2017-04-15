@@ -2,6 +2,7 @@ project(test01)
 
 file(GLOB src
   "*.cpp"
+  ../../Grid/Grid.cpp
 )
 
 add_executable(${PROJECT_NAME} ${src} )

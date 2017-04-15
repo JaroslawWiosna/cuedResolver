@@ -2,6 +2,7 @@ project(cppVersion)
 
 file(GLOB src
   "*.cpp"
+  ../../Cell/Cell.hpp
 )
 
 add_executable(${PROJECT_NAME} ${src} )

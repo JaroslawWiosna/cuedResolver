@@ -1,6 +1,5 @@
 
 #include <gtest/gtest.h>
-#include "Cell/Cell.hpp"
 
 TEST(Test, cppVersion)
 {
