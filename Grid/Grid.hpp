@@ -18,7 +18,6 @@ struct step {
 
 class Grid{
 	public:
-	std::size_t x1, x2;
 	Grid(unsigned int size);
 	void setCue(int x1, int x2);
 	void setBall(int x1, int x2);
