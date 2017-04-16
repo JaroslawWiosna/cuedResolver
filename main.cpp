@@ -19,6 +19,9 @@ int main()
 	grid.setBoost(5,6,-3,0);
 	grid.setBoost(5,8,2,-2);
 
+	grid.setTeleport(1,2);
+	grid.setTeleport(1,4);
+
 	grid.setBall(2,3);
 	grid.setPocket(8,3);
 

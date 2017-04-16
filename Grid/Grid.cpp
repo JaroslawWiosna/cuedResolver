@@ -15,12 +15,14 @@ void Grid::setBall(int x1, int x2) {
 void Grid::setPocket(int x1, int x2) {
 	pocketPosition = std::make_pair(x1,x2);
 }
-
 void Grid::setBoost(int x1, int x2, int addx1, int addx2) {
 	boostVector.push_back(std::make_pair(
 		std::make_pair(x1,x2),
 		std::make_pair(x1+addx1,x2+addx2)
 		));
+}
+void Grid::setTeleport(int x1, int x2) {
+	teleportVector.push_back(std::make_pair(x1,x2));
 }
 Cell Grid::computeMovement(Cell cue, Cell ball) {
 	int new_x1 = ball.first + (ball.first - cue.first);
@@ -66,6 +68,29 @@ void Grid::detectBoostCells() {
 	} while(willContinue);
 }
 
+void Grid::detectTeleportCells() {
+	std::list<step> newCombinations;
+	auto it = combinations.begin();
+	auto jt = teleportVector.begin();
+	auto kt = teleportVector.begin();
+	for( ; it != combinations.end() ; ++it) {
+		for(jt=teleportVector.begin() ; jt != teleportVector.end() ;++jt) {
+			if ( it->ball == *jt   ) {
+				for(kt=teleportVector.begin() ; kt != teleportVector.end() ;++kt) {
+					if(kt == jt) { continue; }
+					newCombinations.push_back(
+					{it->nr, 
+					*kt, 
+					it->path});
+				}
+			}
+		}
+	}
+	for (auto const& i : newCombinations) {
+		combinations.push_back(i);
+	}
+}
+
 void Grid::solve() {
 	auto begin = std::chrono::high_resolution_clock::now();
 	combinations.push_back({0, ballStartPosition, ""});
@@ -91,6 +116,7 @@ void Grid::solve() {
 		}
 		this->detectOutOfGrid();
 		this->detectBoostCells();	
+		this->detectTeleportCells();	
 	}
 	// find the best solution
 	for(step n : combinations) {

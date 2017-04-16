@@ -24,9 +24,11 @@ class Grid{
 	void setBall(int x1, int x2);
 	void setPocket(int x1, int x2);
 	void setBoost(int x1, int x2, int addx1, int addx2);
+	void setTeleport(int x1, int x2);
 	Cell computeMovement(Cell cue, Cell ball); 
 	void detectOutOfGrid();
 	void detectBoostCells();
+	void detectTeleportCells();
 	void solve();
 	void printSolution();
 	void printFastest();
@@ -40,6 +42,7 @@ class Grid{
 	unsigned int size;
 	std::list<Cell> cuesVector;
 	std::list<PairCell> boostVector;
+	std::list<Cell> teleportVector;
 	Cell ballStartPosition;
 	Cell pocketPosition;
 	const unsigned int maxDepth = 11;
